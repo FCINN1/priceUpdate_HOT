@@ -40,7 +40,18 @@ async function initBrowser() {
 
 async function blockUnwantedResources(page) {
   await page.route("**/*", (route) => {
-    const blockedTypes = new Set(["image", "font", "media"]);
+    const blockedTypes = new Set([
+      "image",
+      "font",
+      "stylesheet",
+      "media",
+      "texttrack",
+      "fetch",
+      "eventsource",
+      "websocket",
+      "manifest",
+      "other",
+    ]);
     const blockedDomains = ["google-analytics.com", "doubleclick.net"];
     const url = route.request().url();
 
